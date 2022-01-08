@@ -1,1 +1,1 @@
-# NINJA-TEMPLATE
+# Food ADA testing
