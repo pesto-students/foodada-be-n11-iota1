@@ -62,7 +62,7 @@ const getCityId = async (req, res) => {
       console.log(err);
       return res
         .status(500)
-        .json({ err: true, message: "Something went wrongjjj" });
+        .json({ err: true, message: "Something went wrong" });
     }
   }
 };
@@ -92,7 +92,7 @@ const getCollection = async (req, res) => {
       console.log(err);
       return res
         .status(500)
-        .json({ err: true, message: "Something went wrong 22" });
+        .json({ err: true, message: "Something went wrong " });
     }
   }
 };
@@ -122,14 +122,15 @@ const getLocalities = async (req, res) => {
       console.log(err);
       return res
         .status(500)
-        .json({ err: true, message: "Something went wrong 33" });
+        .json({ err: true, message: "Something went wrong" });
     }
   }
 };
 
 const getRestaurant = async (req, res) => {
   let { q, city_id } = req.query;
-  let query = new RegExp(q, "i");
+  //let query = new RegExp(q, "i");
+  let query =q;
   console.log(query);
   try {
     let result = await Restaurant.find(

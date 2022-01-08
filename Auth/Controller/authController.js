@@ -24,14 +24,13 @@ const sendOtp = async (email, name) => {
 
   let transprter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    service: "gmail",
+    port: 587,
     auth: {
-      user: "jeetendra.chauhan04@gmail.com",
-      pass: "9926262714g",
-      // user: process.env.EMAIL,
-      // pass: process.env.PASSWORD,
+      user: "iotaonepesto@gmail.com",
+      pass: "pesto@123",
+
+      //  user: process.env.EMAIL,
+      //  pass: process.env.PASSWORD,
     },
   });
   let mailOption = {
@@ -42,24 +41,27 @@ const sendOtp = async (email, name) => {
   };
 
   transprter.sendMail(mailOption, async (err) => {
-    // if (err) {
-    //   console.log(err);
-    //   return false;
-    // }
-    // else {
+    if (err) {
+      console.log(err);
+      return false;
+    }
+    else {
       try {
         let user = await Otp.findOne({ email: email });
         if (user) {
           await Otp.updateOne({ email: email }, { otp: otp });
         } else {
           let token = new Otp({ email: email, name: name, otp: otp });
-          await token.save();
+          const a = await token.save();
+          console.log(a);
         }
       } catch (err) {
         console.log(err);
         return false;
       }
-    //}
+    }
+
+    
   });
 
   return otp;
